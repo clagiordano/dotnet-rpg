@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dotnet_rpg.Dtos.Character;
 using dotnet_rpg.Models;
 
 namespace dotnet_rpg.Services.CharacterService
@@ -12,16 +13,16 @@ namespace dotnet_rpg.Services.CharacterService
             new Character { Id = 1, Name = "Sam"}
         };
 
-        public async Task<ServiceResponse<List<Character>>> AddCharacter(Character newCharacter)
+        public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
-            ServiceResponse<List<Character>> serviceResponse = new ServiceResponse<List<Character>>();
+            ServiceResponse<List<GetCharacterDto>> serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
             characters.Add(newCharacter);
             serviceResponse.Data = characters;
 
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<Character>>> GetAll()
+        public async Task<ServiceResponse<List<GetCharacterDto>>> GetAll()
         {
             ServiceResponse<List<Character>> serviceResponse = new ServiceResponse<List<Character>>();
             serviceResponse.Data = characters;
@@ -29,9 +30,9 @@ namespace dotnet_rpg.Services.CharacterService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<Character>> GetById(int id)
+        public async Task<ServiceResponse<GetCharacterDto>> GetById(int id)
         {
-            ServiceResponse<Character> serviceResponse = new ServiceResponse<Character>();
+            ServiceResponse<GetCharacterDto> serviceResponse = new ServiceResponse<GetCharacterDto>();
             serviceResponse.Data = characters.FirstOrDefault(c => c.Id == id);
 
             return serviceResponse;
